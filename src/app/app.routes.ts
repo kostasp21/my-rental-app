@@ -6,5 +6,5 @@ export const routes: Routes = [
   { path: '', redirectTo: 'cars', pathMatch: 'full' },
   { path: 'cars', component: CarsListComponent },
   { path: 'cars/new', component: CarEditComponent },
-  { path: 'cars', component: CarEditComponent }
+  { path: 'cars/:id', component: CarEditComponent }
 ];

@@ -32,6 +32,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
   </mat-card>
 </div>
 
+
 <ng-template #empty>
   <p>Δεν υπάρχουν αυτοκίνητα.</p>
 </ng-template>
