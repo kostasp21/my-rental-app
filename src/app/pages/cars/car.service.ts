@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Car } from '../cars/car.model';
+import { Car } from './car.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CarService {
   private apiUrl = 'http://localhost:3000/cars';
@@ -24,12 +24,13 @@ export class CarService {
   }
 
   updateCar(car: Car): Observable<Car> {
-    return this.http.put<Car>(`${this.apiUrl}/${car.id}`, car);
+    if (!car.car_id) throw new Error('Car ID is required for update');
+    return this.http.put<Car>(`${this.apiUrl}/${car.car_id}`, car);
   }
 
   deleteCar(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
-
 export type { Car };
+

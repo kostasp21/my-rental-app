@@ -24,7 +24,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 <div *ngIf="cars.length > 0; else empty">
   <mat-card *ngFor="let car of cars" style="margin-bottom: 1rem;">
-    <mat-card-title>{{ car.name }} - {{ car.model }}</mat-card-title>
+    <mat-card-title>{{ car.brand }} - {{ car.model }}</mat-card-title>
     <mat-card-actions>
       <button mat-button color="accent" [routerLink]="['/cars', car.id]">Επεξεργασία</button>
       <button mat-button color="warn" (click)="deleteCar(car.id)">Διαγραφή</button>
