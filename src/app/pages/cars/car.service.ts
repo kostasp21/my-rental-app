@@ -23,10 +23,9 @@ export class CarService {
     return this.http.post<Car>(this.apiUrl, car);
   }
 
-  updateCar(car: Car): Observable<Car> {
-    if (!car.car_id) throw new Error('Car ID is required for update');
-    return this.http.put<Car>(`${this.apiUrl}/${car.car_id}`, car);
-  }
+ updateCar(id: number, car: Car): Observable<any> {
+   return this.http.put(`/api/cars/${id}`, car);
+}
 
   deleteCar(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);

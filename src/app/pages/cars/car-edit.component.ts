@@ -101,24 +101,24 @@ export class CarEditComponent implements OnInit {
   private dialog = inject(MatDialog);
 
   ngOnInit() {
-    this.carForm = this.fb.group({
-      brand: ['', Validators.required],
-      model: ['', Validators.required],
-      description: [''],
-      date: [''],
-      price_per_day: [0, [Validators.required, Validators.min(0)]],
-      quantity: [0, [Validators.required, Validators.min(0)]],
-    });
+  this.carForm = this.fb.group({
+    brand: ['', Validators.required],
+    model: ['', Validators.required],
+    description: [''],
+    date: [''],
+    price_per_day: [0, [Validators.required, Validators.min(0)]],
+    quantity: [0, [Validators.required, Validators.min(0)]],
+  });
 
-    this.route.paramMap.subscribe(params => {
-      const idParam = params.get('id');
-      if (idParam) {
-        this.carId = +idParam;
-        this.isEditMode = true;
-        this.loadCar(this.carId);
-      }
-    });
+  const stateCar = history.state?.car as Car | undefined;
+
+  if (stateCar) {
+    this.isEditMode = true;
+    this.carId = stateCar.car_id;
+    this.carForm.patchValue(stateCar);
   }
+}
+    
 
   loadCar(id: number) {
     this.carService.getCarById(id).subscribe({
@@ -131,12 +131,13 @@ export class CarEditComponent implements OnInit {
   }
 
   onSubmit() {
+
     if (this.carForm.invalid) return;
 
     const carData: Car = this.carForm.value;
     if (this.isEditMode && this.carId) {
       carData.car_id = this.carId;
-      this.carService.updateCar(carData).subscribe({
+      this.carService.updateCar(this.carId, carData).subscribe({
         next: () => {
           this.snackBar.open('Το αυτοκίνητο ενημερώθηκε.', 'ΟΚ', { duration: 3000 });
           this.router.navigate(['/cars']);
