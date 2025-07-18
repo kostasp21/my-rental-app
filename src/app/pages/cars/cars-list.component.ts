@@ -29,7 +29,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
         <mat-card-title>{{ car.brand }} - {{ car.model }}</mat-card-title>
         <mat-card-actions>
          <button mat-button color="accent" (click)="editCar(car)">Επεξεργασία</button>
-          <button mat-button color="warn" (click)="deleteCar(car.id)">Διαγραφή</button>
+          <!--<button mat-button color="warn" (click)="deleteCar(car.id)">Διαγραφή</button>-->
         </mat-card-actions>
       </mat-card>
     </div>
