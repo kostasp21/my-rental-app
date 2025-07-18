@@ -62,9 +62,12 @@ export class RegisterComponent {
         this.snackBar.open('Εγγραφή επιτυχής!', 'ΟΚ', { duration: 3000 });
         this.router.navigate(['/login']);
       },
-      error: () => {
-        this.snackBar.open('Αποτυχία εγγραφής.', 'ΟΚ', { duration: 3000 });
-      }
-    });
+     error: (err) => {
+  if (err.status === 409) {
+    this.snackBar.open('Ο χρήστης υπάρχει ήδη.', 'ΟΚ', { duration: 3000 });
+  } else {
+    this.snackBar.open('Αποτυχία εγγραφής.', 'ΟΚ', { duration: 3000 });
+  }
+}});
   }
 }

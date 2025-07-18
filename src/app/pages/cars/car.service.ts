@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CarService {
-  private apiUrl = 'http://localhost:3000/cars';
+  private apiUrl = '/api/cars';
 
   constructor(private http: HttpClient) {}
 
@@ -24,7 +24,7 @@ export class CarService {
   }
 
  updateCar(id: number, car: Car): Observable<any> {
-   return this.http.put(`/api/cars/${id}`, car);
+  return this.http.put(`${this.apiUrl}/${id}`, car);
 }
 
   deleteCar(id: number): Observable<void> {

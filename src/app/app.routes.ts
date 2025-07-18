@@ -1,13 +1,18 @@
-import { Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
+import { carsRoutes } from './pages/cars/cars.routes';  
 import { LoginComponent } from './login/login.component';
-import { authGuard } from './login/auth.guard';
-import { CarsListComponent } from './pages/cars/cars-list.component';
 import { RegisterComponent } from './auth/register.component';
+import { NgModule } from '@angular/core';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' }, 
+  { path: 'cars', children: carsRoutes },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'cars', component: CarsListComponent, canActivate: [authGuard] }
+  { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule {}

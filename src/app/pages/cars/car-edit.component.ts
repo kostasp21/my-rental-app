@@ -132,9 +132,20 @@ export class CarEditComponent implements OnInit {
 
   onSubmit() {
 
+      console.log('onSubmit called');
     if (this.carForm.invalid) return;
 
-    const carData: Car = this.carForm.value;
+  console.log('Form is valid, proceeding with submission');
+
+    const carData: Car = {
+    ...this.carForm.value,
+    price_per_day: Number(this.carForm.value.price_per_day),
+    quantity: Number(this.carForm.value.quantity),
+    date: this.carForm.value.date ? this.carForm.value.date.slice(0, 10) : '',
+  };
+
+  console.log('carData προς update:', carData);
+
     if (this.isEditMode && this.carId) {
       carData.car_id = this.carId;
       this.carService.updateCar(this.carId, carData).subscribe({
